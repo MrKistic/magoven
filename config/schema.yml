@@ -1,0 +1,171 @@
+propel:
+
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+
+  apns_devices:
+    _attributes: { phpName: ApnsDevice }
+    pid: { type: INTEGER, size: '10', primaryKey: true, autoIncrement: true, required: true }
+    clientid: { type: VARCHAR, size: '64', required: true }
+    appname: { type: VARCHAR, size: '255', required: true }
+    appversion: { type: VARCHAR, size: '25', required: false }
+    deviceuid: { type: CHAR, size: '40', required: true }
+    devicetoken: { type: CHAR, size: '64', required: true }
+    devicename: { type: VARCHAR, size: '255', required: true }
+    devicemodel: { type: VARCHAR, size: '100', required: true }
+    deviceversion: { type: VARCHAR, size: '25', required: true }
+    pushbadge: { type: VARCHAR, size: 12, default: 'disabled' }
+    pushalert: { type: VARCHAR, size: 12, default: 'enabled' }
+    pushsound: { type: VARCHAR, size: 12, default: 'disabled' }
+    development: { type: VARCHAR, size: 12, default: 'production' }
+    status: { type: VARCHAR, size: 12, default: 'active' }
+    created: { type: TIMESTAMP }
+    modified: { type: TIMESTAMP }
+    _indexes: { clientid: [clientid], devicetoken: [devicetoken], devicename: [devicename], devicemodel: [devicemodel], deviceversion: [deviceversion], pushbadge: [pushbadge], pushalert: [pushalert], pushsound: [pushsound], development: [development], status: [status] }
+    _uniques: { appname: [appname, deviceuid] }
+
+  apns_device_history:
+    _attributes: { phpName: ApnsDeviceHistory }
+    pid: { type: INTEGER, size: '10', primaryKey: true, autoIncrement: true, required: true }
+    clientid: { type: VARCHAR, size: '64', required: true }
+    appname: { type: VARCHAR, size: '255', required: true }
+    appversion: { type: VARCHAR, size: '25', required: false }
+    deviceuid: { type: CHAR, size: '40', required: true }
+    devicetoken: { type: CHAR, size: '64', required: true }
+    devicename: { type: VARCHAR, size: '255', required: true }
+    devicemodel: { type: VARCHAR, size: '100', required: true }
+    deviceversion: { type: VARCHAR, size: '25', required: true }
+    pushbadge: { type: VARCHAR, size: 12, default: 'disabled' }
+    pushalert: { type: VARCHAR, size: 12, default: 'disabled' }
+    pushsound: { type: VARCHAR, size: 12, default: 'disabled' }
+    development: { type: VARCHAR, size: 12, required: true, defaultValue: 'production' }
+    status: { type: VARCHAR, size: 12, required: true, defaultValue: 'active' }
+    archived: { type: TIMESTAMP, required: true }
+    created: { type: TIMESTAMP }
+    modified: { type: TIMESTAMP }
+    _indexes: { clientid: [clientid], devicetoken: [devicetoken], devicename: [devicename], devicemodel: [devicemodel], deviceversion: [deviceversion], pushbadge: [pushbadge], pushalert: [pushalert], pushsound: [pushsound], development: [development], status: [status], appname: [appname], appversion: [appversion], deviceuid: [deviceuid], archived: [archived] }
+
+  apns_messages:
+    _attributes: { phpName: ApnsMessage }
+    pid: { type: INTEGER, size: '10', primaryKey: true, autoIncrement: true, required: true }
+    clientid: { type: VARCHAR, size: '64', required: true }
+    fk_device: { type: INTEGER, size: '9', required: true }
+    message: { type: VARCHAR, size: '255', required: true }
+    delivery: { type: TIMESTAMP, required: true }
+    status: { type: VARCHAR, size: 12, required: true, defaultValue: 'queued' }
+    created: { type: TIMESTAMP }
+    modified: { type: TIMESTAMP }
+    _indexes: { clientid: [clientid], fk_device: [fk_device], status: [status], message: [message], delivery: [delivery] }
+
+#  apns_token:
+#    id:
+#    created_at:
+#    updated_at:
+#    application_id: { type: VARCHAR, size: '255', required: true, defaultValue: '' }
+#    user_id: { type: VARCHAR, size: '255', required: true, defaultValue: '' }
+#    apns_token: { type: VARCHAR, size: '64', required: true, defaultValue: '' }
+#    status: { type: VARCHAR, size: '12', required: true, defaultValue: active }
+#    _uniques: { apns_app_user: [application_id, user_id] }
+
+  issue:
+    _attributes: { phpName: Issue }
+    id:
+    created_at:
+    updated_at:
+    publication_id: { type: INTEGER, size: 10, foreignTable: publication, foreignReference: id, required: true }
+    name: { type: VARCHAR, size: '100', required: true }
+    free: { type: BOOLEAN, default: true }
+    product_id: { type: VARCHAR, size: '255', required: false }
+    title: { type: VARCHAR, size: '100', required: true }
+    info: { type: VARCHAR, size: '500', required: true }
+    date: { type: DATE, required: true }
+    published: { type: BOOLEAN, default: true }
+    cover: { type: VARCHAR, size: '1024', required: false }
+    url: { type: VARCHAR, size: '1024', required: false }
+    upload_type: { type: VARCHAR, size: '1', required: true, default: 'u' }
+    uploaded_cover: { type: VARCHAR, size: '256', required: false }
+    uploaded_hpub: { type: VARCHAR, size: '256', required: false }
+    uploaded_zip: { type: VARCHAR, size: '256', required: false }
+    allow_notification: { type: BOOLEAN, default: false }
+    notified: { type: BOOLEAN, default: false }
+    itunes_include: { type: BOOLEAN, default: false }
+    itunes_summary: { type: VARCHAR, size: '1024', required: false }
+    itunes_coverart_url: { type: VARCHAR, size: '1024', required: false }
+    itunes_published: { type: TIMESTAMP, size: '26', required: false }
+    itunes_updated: { type: TIMESTAMP, size: '26', required: false }
+
+  publication:
+    _attributes: { phpName: Publication }
+    id:
+    created_at:
+    updated_at:
+    application_id: { type: VARCHAR, size: '255', required: true }
+    name: { type: VARCHAR, size: '100', required: true }
+    development_mode: { type: BOOLEAN, default: true }
+    subscription_behavior: { type: VARCHAR, size: '255', required: false }
+    issue_download_security: { type: BOOLEAN, required: false, default: false }
+    itunes_revalidation_duration: { type: INTEGER, default: 12 }
+    itunes_production_level: { type: VARCHAR, size: '255', required: false }
+    itunes_shared_secret: { type: VARCHAR, size: '255', required: false }
+    itunes_updated: { type: TIMESTAMP, required: false }
+    sandbox_pem: { type: VARCHAR, size: '256', required: false }
+    sandbox_password: { type: VARCHAR, size: '32', required: false }
+    production_pem: { type: VARCHAR, size: '256', required: false }
+    production_password: { type: VARCHAR, size: '32', required: false }
+
+  purchase:
+    _attributes: { phpName: Purchase }
+    _uniques:
+      purchase_app_user_product: [application_id, user_id, product_id]
+    id:
+    created_at:
+    updated_at:
+    application_id: { type: VARCHAR, size: '255', required: true }
+    user_id: { type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    product_id: { type: VARCHAR, size: '255', required: true, defaultValue: '' }
+
+  receipt:
+    _attributes: { phpName: Receipt }
+    _uniques:
+      receipt_app_user_transaction: [application_id, user_id, transaction_id]
+    id:
+    created_at:
+    updated_at:
+    application_id: { type: VARCHAR, size: '255', required: true }
+    quantity: { type: VARCHAR, size: '10', required: false }
+    product_id: { type: VARCHAR, size: '255', required: false }
+    receipt_type: { type: VARCHAR, size: '30', required: false }
+    transaction_id: { type: VARCHAR, size: '250', required: true, defaultValue: '' }
+    user_id: { type: VARCHAR, size: '255', required: true, defaultValue: '' }
+    purchase_date: { type: VARCHAR, size: '50', required: false }
+    original_transaction_id: { type: VARCHAR, size: '100', required: false }
+    original_purchase_date: { type: VARCHAR, size: '50', required: false }
+    app_item_id: { type: VARCHAR, size: '150', required: false }
+    version_external_identifier: { type: VARCHAR, size: '50', required: false }
+    bid: { type: VARCHAR, size: '50', required: false }
+    bvrs: { type: VARCHAR, size: '50', required: false }
+    base64_receipt: { type: LONGVARCHAR, required: false }
+
+  subscription:
+    _attributes: { phpName: Subscription }
+    _uniques:
+      subscription_app_user: [application_id, user_id]
+    id:
+    created_at:
+    updated_at:
+    application_id: { label: 'Application ID', type: VARCHAR, size: '255', required: true }
+    user_id: { type: VARCHAR, size: '255', required: true }
+    effective_date: { type: TIMESTAMP, required: true }
+    expiration_date: { type: TIMESTAMP, required: true }
+    last_validated: { type: TIMESTAMP, required: true }
+
+  system_log:
+    _attributes: { phpName: SystemLog }
+    id:
+    created_at:
+    updated_at:
+    log_type: { type: VARCHAR, size: '25', required: false }
+    message: { type: LONGVARCHAR, required: false }
+    application_id: { type: VARCHAR, size: '255' }
+    user_id: { type: VARCHAR, size: '255' }

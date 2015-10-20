@@ -1,0 +1,42 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/07-Databases
+
+dev:
+  propel:
+    param:
+      classname:  DebugPDO
+      dsn:        mysql:dbname=newsstand_admin;host=127.0.0.1
+      username:   newsstand
+      password:   adm1n
+      debug:
+        realmemoryusage: true
+        details:
+          time:       { enabled: true }
+          slow:       { enabled: true, threshold: 0.1 }
+          mem:        { enabled: true }
+          mempeak:    { enabled: true }
+          memdelta:   { enabled: true }
+
+staging:
+  propel:
+    param:
+      classname:  DebugPDO
+      dsn:        mysql:dbname=magoven;host=127.0.0.1
+      username:   db.magoven
+      password:   mag0ven
+
+prod:
+  propel:
+    param:
+      classname:  PropelPDO
+      dsn:        mysql:dbname=magoven;host=127.0.0.1
+      username:   magoven_user
+      password:   password
+
+all:
+  propel:
+    class:        sfPropelDatabase
+    param:
+      encoding:   utf8
+      persistent: true
+      pooling:    true

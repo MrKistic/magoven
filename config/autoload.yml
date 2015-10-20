@@ -1,0 +1,19 @@
+autoload:
+
+  # penguin
+  penguin:
+    name:           penguin
+    path:           %SF_LIB_DIR%/vendor/penguin
+    recursive:      true
+
+  # easyapns
+  easyapns:
+    name:           easyapns
+    path:           %SF_LIB_DIR%/vendor/easyapns
+    recursive:      true
+
+  # krumo
+  krumo:
+    name:           krumo
+    path:           %SF_LIB_DIR%/vendor/krumo
+    recursive:      true
