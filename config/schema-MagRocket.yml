@@ -1,0 +1,130 @@
+propel:
+
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+
+  APNS_TOKENS:
+    _attributes: { phpName: ApnsTokens }
+    APP_ID: { phpName: AppId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    USER_ID: { phpName: UserId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    APNS_TOKEN: { phpName: ApnsToken, type: VARCHAR, size: '64', required: true, defaultValue: '' }
+    STATUS: { phpName: Status, type: CHAR, required: true, defaultValue: active }
+    MODIFIED: { phpName: Modified, type: TIMESTAMP, required: true, defaultValue: '0000-00-00 00:00:00' }
+
+  ISSUES:
+    _attributes: { phpName: Issues }
+    ID: { phpName: Id, type: INTEGER, size: '10', autoIncrement: true, required: true }
+    APP_ID: { phpName: AppId, type: VARCHAR, size: '255', required: true }
+    NAME: { phpName: Name, type: VARCHAR, size: '100', required: false }
+    PRICING: { phpName: Pricing, type: CHAR, required: true, defaultValue: paid }
+    PRODUCT_ID: { phpName: ProductId, type: VARCHAR, size: '255', required: false }
+    TITLE: { phpName: Title, type: VARCHAR, size: '100', required: false }
+    INFO: { phpName: Info, type: VARCHAR, size: '500', required: false }
+    DATE: { phpName: Date, type: TIMESTAMP, required: false }
+    AVAILABILITY: { phpName: Availability, type: CHAR, required: true, defaultValue: pending }
+    COVER: { phpName: Cover, type: VARCHAR, size: '1024', required: false }
+    URL: { phpName: Url, type: VARCHAR, size: '1024', required: false }
+    ITUNES_SUMMARY: { phpName: ItunesSummary, type: VARCHAR, size: '1024', required: false }
+    ITUNES_COVERART_URL: { phpName: ItunesCoverartUrl, type: VARCHAR, size: '1024', required: false }
+    ITUNES_PUBLISHED: { phpName: ItunesPublished, type: VARCHAR, size: '26', required: false }
+    ITUNES_UPDATED: { phpName: ItunesUpdated, type: VARCHAR, size: '26', required: false }
+    _uniques: { ID: [ID] }
+
+  PUBLICATION:
+    _attributes: { phpName: Publication }
+    ID: { phpName: Id, type: INTEGER, size: '10', autoIncrement: true, required: true }
+    APP_ID: { phpName: AppId, type: VARCHAR, size: '255', required: false }
+    NAME: { phpName: Name, type: VARCHAR, size: '100', required: false }
+    DEVELOPMENT_MODE: { phpName: DevelopmentMode, type: VARCHAR, size: '5', required: false }
+    ISSUE_DOWNLOAD_SECURITY: { phpName: IssueDownloadSecurity, type: VARCHAR, size: '5', required: false }
+    ITUNES_SHARED_SECRET: { phpName: ItunesSharedSecret, type: VARCHAR, size: '255', required: false }
+    _uniques: { ID: [ID] }
+
+  PURCHASES:
+    _attributes: { phpName: Purchases }
+    APP_ID: { phpName: AppId, type: VARCHAR, size: '255', primaryKey: true, required: true }
+    USER_ID: { phpName: UserId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    PRODUCT_ID: { phpName: ProductId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+
+  RECEIPTS:
+    _attributes: { phpName: Receipts }
+    APP_ID: { phpName: AppId, type: VARCHAR, size: '255', primaryKey: true, required: true }
+    QUANTITY: { phpName: Quantity, type: VARCHAR, size: '10', required: false }
+    PRODUCT_ID: { phpName: ProductId, type: VARCHAR, size: '255', required: false }
+    TYPE: { phpName: Type, type: VARCHAR, size: '30', required: false }
+    TRANSACTION_ID: { phpName: TransactionId, type: VARCHAR, size: '250', primaryKey: true, required: true, defaultValue: '' }
+    USER_ID: { phpName: UserId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    PURCHASE_DATE: { phpName: PurchaseDate, type: VARCHAR, size: '50', required: false }
+    ORIGINAL_TRANSACTION_ID: { phpName: OriginalTransactionId, type: VARCHAR, size: '100', required: false }
+    ORIGINAL_PURCHASE_DATE: { phpName: OriginalPurchaseDate, type: VARCHAR, size: '50', required: false }
+    APP_ITEM_ID: { phpName: AppItemId, type: VARCHAR, size: '150', required: false }
+    VERSION_EXTERNAL_IDENTIFIER: { phpName: VersionExternalIdentifier, type: VARCHAR, size: '50', required: false }
+    BID: { phpName: Bid, type: VARCHAR, size: '50', required: false }
+    BVRS: { phpName: Bvrs, type: VARCHAR, size: '50', required: false }
+    BASE64_RECEIPT: { phpName: Base64Receipt, type: LONGVARCHAR, required: false }
+
+  SUBSCRIPTIONS:
+    _attributes: { phpName: Subscriptions }
+    APP_ID: { phpName: AppId, type: VARCHAR, size: '255', primaryKey: true, required: true }
+    USER_ID: { phpName: UserId, type: VARCHAR, size: '255', primaryKey: true, required: true }
+    EFFECTIVE_DATE: { phpName: EffectiveDate, type: TIMESTAMP, required: true }
+    EXPIRATION_DATE: { phpName: ExpirationDate, type: TIMESTAMP, required: true }
+    LAST_VALIDATED: { phpName: LastValidated, type: TIMESTAMP, required: true }
+
+  SYSTEM_LOG:
+    _attributes: { phpName: SystemLog }
+    ID: { phpName: Id, type: INTEGER, size: '11', primaryKey: true, autoIncrement: true, required: true }
+    TYPE: { phpName: Type, type: VARCHAR, size: '25', required: false }
+    MESSAGE: { phpName: Message, type: LONGVARCHAR, required: false }
+    TIMESTAMP: { phpName: Timestamp, type: TIMESTAMP, required: true, defaultValue: CURRENT_TIMESTAMP }
+
+  crud_groups:
+    _attributes: { phpName: CrudGroups }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    group_name: { phpName: GroupName, type: VARCHAR, size: '255', required: false }
+    group_description: { phpName: GroupDescription, type: LONGVARCHAR, required: false }
+    group_manage_flag: { phpName: GroupManageFlag, type: TINYINT, size: '4', required: false }
+    group_full_controll: { phpName: GroupFullControll, type: TINYINT, size: '4', required: false }
+    group_read: { phpName: GroupRead, type: TINYINT, size: '4', required: false }
+    group_read_write: { phpName: GroupReadWrite, type: TINYINT, size: '4', required: false }
+    group_read_delete: { phpName: GroupReadDelete, type: TINYINT, size: '4', required: false }
+
+  crud_histories:
+    _attributes: { phpName: CrudHistories }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    user_id: { phpName: UserId, type: BIGINT, size: '20', required: true }
+    user_name: { phpName: UserName, type: VARCHAR, size: '255', required: true }
+    history_action: { phpName: HistoryAction, type: VARCHAR, size: '255', required: false }
+    history_date_time: { phpName: HistoryDateTime, type: TIMESTAMP, required: false }
+    history_table_name: { phpName: HistoryTableName, type: VARCHAR, size: '255', required: false }
+    history_data: { phpName: HistoryData, type: LONGVARCHAR, required: false }
+
+  crud_permissions:
+    _attributes: { phpName: CrudPermissions }
+    group_id: { phpName: GroupId, type: BIGINT, size: '20', primaryKey: true, required: true }
+    table_name: { phpName: TableName, type: VARCHAR, size: '255', primaryKey: true, required: true }
+    permission_type: { phpName: PermissionType, type: TINYINT, size: '4', primaryKey: true, required: true }
+
+  crud_user_permissions:
+    _attributes: { phpName: CrudUserPermissions }
+    user_id: { phpName: UserId, type: BIGINT, size: '20', primaryKey: true, required: true }
+    table_name: { phpName: TableName, type: VARCHAR, size: '255', primaryKey: true, required: true }
+    permission_type: { phpName: PermissionType, type: TINYINT, size: '4', primaryKey: true, required: true }
+
+  crud_users:
+    _attributes: { phpName: CrudUsers }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    group_id: { phpName: GroupId, type: BIGINT, size: '20', required: false }
+    user_name: { phpName: UserName, type: VARCHAR, size: '255', required: false }
+    user_password: { phpName: UserPassword, type: VARCHAR, size: '100', required: false }
+    user_first_name: { phpName: UserFirstName, type: VARCHAR, size: '255', required: false }
+    user_las_name: { phpName: UserLasName, type: VARCHAR, size: '255', required: false }
+    user_image: { phpName: UserImage, type: VARCHAR, size: '255', required: false }
+    user_email: { phpName: UserEmail, type: VARCHAR, size: '255', required: false }
+    user_website: { phpName: UserWebsite, type: VARCHAR, size: '255', required: false }
+    user_aim: { phpName: UserAim, type: VARCHAR, size: '255', required: false }
+    user_yahoo: { phpName: UserYahoo, type: VARCHAR, size: '255', required: false }
+    user_skype: { phpName: UserSkype, type: VARCHAR, size: '255', required: false }
+    user_info: { phpName: UserInfo, type: LONGVARCHAR, required: false }
+    user_manage_flag: { phpName: UserManageFlag, type: TINYINT, size: '4', required: false }

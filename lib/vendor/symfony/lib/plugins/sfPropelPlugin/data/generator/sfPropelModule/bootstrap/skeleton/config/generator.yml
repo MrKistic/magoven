@@ -1,0 +1,5 @@
+generator:
+  class: sfPropelGenerator
+  param:
+##CONFIG##
+    with_show: true

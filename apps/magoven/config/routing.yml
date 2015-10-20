@@ -1,0 +1,74 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: home, action: index }
+
+# authentication
+sf_guard_signin:
+  url:   /login
+  param: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url:   /logout
+  param: { module: sfGuardAuth, action: signout }
+
+sf_guard_password:
+  url:   /request_password
+  param: { module: sfGuardForgotPassword, action: password }
+
+# api
+api_get_shelf:
+  url:  /api/shelf/:app_id/:user_id
+  param: { module: api, action: getShelf }
+  requirements: { app_id: '.*'}
+
+api_get_issues_name:
+  url:  /api/issue/:app_id/:user_id/:name
+  param: { module: api, action: getIssuesByName }
+  requirements: { app_id: '.*'}
+
+api_get_purchases:
+  url:  /api/purchases/:app_id/:user_id
+  param: { module: api, action: getPurchases }
+  requirements: { app_id: '.*'}
+
+api_get_itunes:
+  url:  /api/itunes/:app_id
+  param: { module: api, action: getITunes }
+  requirements: { app_id: '.*'}
+
+api_confirm_purchase:
+  url: /api/confirmpurchase/:app_id/:user_id
+  param: { module: api, action: confirmPurchase }
+  requirements: { app_id: '.*'}
+
+api_register_apns:
+  url: /api/apns/:app_id/:user_id
+  param: { module: api, action: registerAPNS }
+  requirements: { app_id: '.*'}
+
+api_register_apns_get:
+  url: /api/apns
+  param: { module: api, action: registerAPNS }
+  requirements: { app_id: '.*'}
+
+api_process_apns_queue:
+  url: /api/processApnsQueue/:app_id
+  param: { module: api, action: processApnsQueue }
+  requirements: { app_id: '.*'}
+
+# api - public for getting covers, hpubs etc.
+api_get_issue_cover:
+  url:  /api/cover/:issue_id
+  param: { module: api, action: getCover }
+
+# generic rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

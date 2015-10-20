@@ -1,0 +1,12 @@
+
+Custom Propel generator theme:
+
+MagOven/lib/vendor/symfony/lib/plugins/sfPropelPlugin/data/generator/sfPropelModule/bootstrap
+
+Module generation:
+
+./symfony propel:generate-module magoven publications Publication --theme=bootstrap --with-show
+
+Default admin password:
+
+secret

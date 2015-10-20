@@ -1,0 +1,36 @@
+propel:
+
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+
+  apns_tokens:
+    _attributes: { phpName: ApnsTokens }
+    app_id: { phpName: AppId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    user_id: { phpName: UserId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    apns_token: { phpName: ApnsToken, type: VARCHAR, size: '64', primaryKey: true, required: true, defaultValue: '' }
+
+  issues:
+    _attributes: { phpName: Issues }
+    name: { phpName: Name, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    app_id: { phpName: AppId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    title: { phpName: Title, type: VARCHAR, size: '255', required: false }
+    info: { phpName: Info, type: LONGVARCHAR, required: false }
+    date: { phpName: Date, type: TIMESTAMP, required: true, defaultValue: CURRENT_TIMESTAMP }
+    cover: { phpName: Cover, type: VARCHAR, size: '255', required: false }
+    product_id: { phpName: ProductId, type: VARCHAR, size: '255', required: false }
+
+  purchased_issues:
+    _attributes: { phpName: PurchasedIssues }
+    app_id: { phpName: AppId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    user_id: { phpName: UserId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    product_id: { phpName: ProductId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+
+  receipts:
+    _attributes: { phpName: Receipts }
+    transaction_id: { phpName: TransactionId, type: VARCHAR, size: '30', primaryKey: true, required: true, defaultValue: '' }
+    app_id: { phpName: AppId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    user_id: { phpName: UserId, type: VARCHAR, size: '255', primaryKey: true, required: true, defaultValue: '' }
+    product_id: { phpName: ProductId, type: VARCHAR, size: '255', required: false }
+    type: { phpName: Type, type: VARCHAR, size: '30', required: false }
+    base64_receipt: { phpName: Base64Receipt, type: LONGVARCHAR, required: false }

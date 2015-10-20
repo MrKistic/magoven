@@ -1,0 +1,22 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/13-View
+
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    #title:        symfony project
+    #description:  symfony project
+    #keywords:     symfony, project
+    #language:     en
+    #robots:       index, follow
+
+  stylesheets:    [bootstrap.css, bootstrap-responsive.css, datetimepicker.min.css, bootstrap-fileupload.css, main.css]
+#  stylesheets:    [main.css, //netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css, datetimepicker.min.css, bootstrap-fileupload.css]
+
+  javascripts:    [jquery-1.9.1.js, bootstrap.js, bootbox.js, datetimepicker.js, main.js, bootstrap-fileupload.js]
+#  javascripts:    [jquery-1.9.1.js, //netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.j, bootbox.js, datetimepicker.js, main.js, bootstrap-fileupload.js]
+
+  has_layout:     true
+  layout:         layout

@@ -1,0 +1,10 @@
+# Project files
+/cache/*
+/log/*
+/web/uploads/*
+
+# Other Files
+old.git/
+.com.apple.*
+.idea*
+.DS_Store

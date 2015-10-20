@@ -1,0 +1,74 @@
+
+body {
+  padding-top: 75px;
+  background: url(../img/light_toast/light_toast.png);
+}
+
+span.help-inline {
+  display: none !important;
+}
+
+.pub-details {
+  position: relative;
+  line-height: 20px;
+  font-size: 16px;
+}
+
+.pub-details label {
+  font-weight: bold;
+  font-size: 16px;
+  display: inline;
+}
+
+.pub-details div {
+  margin-bottom: 10px;
+}
+
+.pub-details .controls {
+  position: absolute;
+  right: 0px;
+  top: 40%;
+}
+
+label.btn input {
+  visibility: hidden;
+}
+
+form div.file div.uneditable-input {
+  height: 20px !important;
+}
+
+form div.radio_list, form div.fileupload {
+  display: inline-block;
+}
+
+table div.container {
+  width: 100%;
+}
+
+select {
+  width: 310px;
+}
+
+.warning {
+  color: #da4f49;
+}
+div.pem-expires {
+  margin-top: -25px;
+  padding-bottom: 20px;
+}
+div.pem-help {
+  margin-bottom: 7px;
+}
+
+form .hint-small {
+  margin-top: 5px;
+  margin-bottom: -5px;
+  padding-left: 5px;
+  font-size: 12px;
+  color: #666666;
+}
+
+form .hint-small.checkbox {
+  display: inline-block;
+}

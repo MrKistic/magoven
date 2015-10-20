@@ -1,0 +1,57 @@
+propel:
+
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+
+  apns_device_history:
+    _attributes: { phpName: ApnsDeviceHistory }
+    pid: { phpName: Pid, type: INTEGER, size: '9', primaryKey: true, autoIncrement: true, required: true }
+    clientid: { phpName: Clientid, type: VARCHAR, size: '64', required: true }
+    appname: { phpName: Appname, type: VARCHAR, size: '255', required: true }
+    appversion: { phpName: Appversion, type: VARCHAR, size: '25', required: false }
+    deviceuid: { phpName: Deviceuid, type: CHAR, size: '40', required: true }
+    devicetoken: { phpName: Devicetoken, type: CHAR, size: '64', required: true }
+    devicename: { phpName: Devicename, type: VARCHAR, size: '255', required: true }
+    devicemodel: { phpName: Devicemodel, type: VARCHAR, size: '100', required: true }
+    deviceversion: { phpName: Deviceversion, type: VARCHAR, size: '25', required: true }
+    pushbadge: { phpName: Pushbadge, type: CHAR, required: false, defaultValue: disabled }
+    pushalert: { phpName: Pushalert, type: CHAR, required: false, defaultValue: disabled }
+    pushsound: { phpName: Pushsound, type: CHAR, required: false, defaultValue: disabled }
+    development: { phpName: Development, type: CHAR, required: true, defaultValue: production }
+    status: { phpName: Status, type: CHAR, required: true, defaultValue: active }
+    archived: { phpName: Archived, type: TIMESTAMP, required: true }
+    _indexes: { clientid: [clientid], devicetoken: [devicetoken], devicename: [devicename], devicemodel: [devicemodel], deviceversion: [deviceversion], pushbadge: [pushbadge], pushalert: [pushalert], pushsound: [pushsound], development: [development], status: [status], appname: [appname], appversion: [appversion], deviceuid: [deviceuid], archived: [archived] }
+
+  apns_devices:
+    _attributes: { phpName: ApnsDevices }
+    pid: { phpName: Pid, type: INTEGER, size: '9', primaryKey: true, autoIncrement: true, required: true }
+    clientid: { phpName: Clientid, type: VARCHAR, size: '64', required: true }
+    appname: { phpName: Appname, type: VARCHAR, size: '255', required: true }
+    appversion: { phpName: Appversion, type: VARCHAR, size: '25', required: false }
+    deviceuid: { phpName: Deviceuid, type: CHAR, size: '40', required: true }
+    devicetoken: { phpName: Devicetoken, type: CHAR, size: '64', required: true }
+    devicename: { phpName: Devicename, type: VARCHAR, size: '255', required: true }
+    devicemodel: { phpName: Devicemodel, type: VARCHAR, size: '100', required: true }
+    deviceversion: { phpName: Deviceversion, type: VARCHAR, size: '25', required: true }
+    pushbadge: { phpName: Pushbadge, type: CHAR, required: false, defaultValue: disabled }
+    pushalert: { phpName: Pushalert, type: CHAR, required: false, defaultValue: disabled }
+    pushsound: { phpName: Pushsound, type: CHAR, required: false, defaultValue: disabled }
+    development: { phpName: Development, type: CHAR, required: true, defaultValue: production }
+    status: { phpName: Status, type: CHAR, required: true, defaultValue: active }
+    created: { phpName: Created, type: TIMESTAMP, required: true }
+    modified: { phpName: Modified, type: TIMESTAMP, required: true, defaultValue: '0000-00-00 00:00:00' }
+    _indexes: { clientid: [clientid], devicetoken: [devicetoken], devicename: [devicename], devicemodel: [devicemodel], deviceversion: [deviceversion], pushbadge: [pushbadge], pushalert: [pushalert], pushsound: [pushsound], development: [development], status: [status], created: [created], modified: [modified] }
+    _uniques: { appname: [appname, deviceuid] }
+
+  apns_messages:
+    _attributes: { phpName: ApnsMessages }
+    pid: { phpName: Pid, type: INTEGER, size: '9', primaryKey: true, autoIncrement: true, required: true }
+    clientid: { phpName: Clientid, type: VARCHAR, size: '64', required: true }
+    fk_device: { phpName: FkDevice, type: INTEGER, size: '9', required: true }
+    message: { phpName: Message, type: VARCHAR, size: '255', required: true }
+    delivery: { phpName: Delivery, type: TIMESTAMP, required: true }
+    status: { phpName: Status, type: CHAR, required: true, defaultValue: queued }
+    created: { phpName: Created, type: TIMESTAMP, required: true }
+    modified: { phpName: Modified, type: TIMESTAMP, required: true, defaultValue: '0000-00-00 00:00:00' }
+    _indexes: { clientid: [clientid], fk_device: [fk_device], status: [status], created: [created], modified: [modified], message: [message], delivery: [delivery] }

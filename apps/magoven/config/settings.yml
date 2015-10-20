@@ -1,0 +1,56 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/04-Settings
+
+prod:
+  .settings:
+    error_reporting:        0
+    no_script_name:         false
+    logging_enabled:        false
+
+dev:
+  .settings:
+    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_DEPRECATED) ."\n" ?>
+#    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
+    web_debug:              true
+    cache:                  false
+    no_script_name:         false
+    etag:                   false
+
+staging:
+  .settings:
+#    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_DEPRECATED ^ E_NOTICE)."\n" ?>
+#    error_reporting:        <?php echo ((E_ALL | E_STRICT) ^ E_NOTICE)."\n" ?>
+    error_reporting:        <?php echo (E_ERROR | E_PARSE)."\n" ?>
+    cache:                  false
+    web_debug:              false
+    no_script_name:         false
+    etag:                   false
+
+all:
+  .settings:
+    # Form security secret (CSRF protection)
+    csrf_secret:            2aba54aa9bfbc2c04059da2a58d556d5ddff7422
+
+    # Output escaping settings
+    escaping_strategy:      false
+    escaping_method:        ESC_SPECIALCHARS
+
+    # Enable the database manager
+    use_database:           true
+
+    enabled_modules:        [default, sfGuardGroup, sfGuardUser, sfGuardPermission, sfGuardAuth, sfGuardForgotPassword, sfGuardRegister]
+
+    login_module:           sfGuardAuth
+    login_action:           signin
+
+    secure_module:          sfGuardAuth
+    secure_action:          secure
+
+    sf_guard_extra_plugin:
+      mail_from:        mrkistic@minimumchips.com
+      name_from:        noreply
+      subject_confirm:  Confirm Registration
+      subject_complete: Request complete
+      subject_request:  Request to reset password
+      subject_success:  Password reset successfully
+      reset_type:       set # set to `ask` for asking (see above)
